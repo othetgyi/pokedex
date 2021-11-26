@@ -1,17 +1,16 @@
 import "./App.css";
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 
 const App = () => {
-  const [characters, setCharacters] = useState([]);
+  // const [characters, setCharacters] = useState([]);
 
   useEffect(() => {
     const fetchCharacters = async () => {
-      const result = await fetch(
-        `https://pokeapi.co/api/v2/pokemon?limit=20&offset=200`
-      );
+      const result = await fetch(`https://pokeapi.co/api/v2/pokemon/1`);
       console.log(result);
     };
-  });
+    fetchCharacters();
+  }, []);
 
   return <div className="container">Hello</div>;
 };
