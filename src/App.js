@@ -7,7 +7,8 @@ const App = () => {
   useEffect(() => {
     const fetchCharacters = async () => {
       const result = await fetch(`https://pokeapi.co/api/v2/pokemon/1`);
-      console.log(result);
+      const characters = await result.json();
+      console.log(characters);
     };
     fetchCharacters();
   }, []);
