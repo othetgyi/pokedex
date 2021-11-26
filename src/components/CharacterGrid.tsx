@@ -1,11 +1,13 @@
 import React from "react";
-import { CharacterItem } from "./CharacterItem";
+import { Character } from "../App";
 
-export const CharacterGrid: React.FC<{ items: any }> = ({ items }) => {
+export const CharacterGrid: React.FC<{ characters: Character[] }> = ({
+  characters,
+}) => {
   return (
     <div>
-      {items.map((item: any) => (
-        <CharacterItem key={item.char_id} item={item} />
+      {characters.map((character: any) => (
+        <h1>{character.name}</h1>
       ))}
     </div>
   );
