@@ -1,5 +1,6 @@
 import React from "react";
 import { Character } from "../App";
+import { CharacterItem } from "./CharacterItem";
 
 export const CharacterGrid: React.FC<{ characters: Character[] }> = ({
   characters,
@@ -7,7 +8,7 @@ export const CharacterGrid: React.FC<{ characters: Character[] }> = ({
   return (
     <div>
       {characters.map((character: any) => (
-        <h1>{character.name}</h1>
+        <CharacterItem character={character} />
       ))}
     </div>
   );

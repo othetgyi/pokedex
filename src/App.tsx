@@ -13,10 +13,19 @@ const App = () => {
 
   useEffect(() => {
     const fetchCharacters = async () => {
-      const result = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=20`);
+      const result = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=10`);
       const charactersInObject = await result.json();
       const characters = charactersInObject.results;
-      setCharacters(characters);
+      console.log("***characters***", characters);
+
+      characters.forEach(async (pokemon: any) => {
+        const res = await fetch(
+          `https://pokeapi.co/api/v2/pokemon/${pokemon.name}`
+        );
+        const data = await res.json();
+        console.log("***data***", data);
+        setCharacters((currentList) => [...currentList, data]);
+      });
     };
     fetchCharacters();
   }, []);
