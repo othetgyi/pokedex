@@ -1,7 +1,9 @@
 import "./App.css";
 import React, { useEffect, useState } from "react";
-
-import { CharacterGrid } from "./components/CharacterGrid";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { Grid } from "./components/Grid";
+import { DetailsPage } from "./components/DetailsPage";
+import { NewPage } from "./components/NewPage";
 
 export type Character = {
   name: string;
@@ -29,7 +31,21 @@ const App = () => {
     };
     fetchCharacters();
   }, []);
-  return <CharacterGrid characters={characters} />;
+  return (
+    <Router>
+      <li>
+        <Link to="/sample">Sample</Link>
+      </li>
+      <li>
+        <Link to="/newPage">NewPage</Link>
+      </li>
+      <Grid characters={characters} />
+      <Routes>
+        <Route path="/details/:name" element={<DetailsPage />} />
+        <Route path="/newPage" element={<NewPage />} />
+      </Routes>
+    </Router>
+  );
 };
 
 export default App;

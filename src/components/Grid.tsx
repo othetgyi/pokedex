@@ -1,7 +1,8 @@
 import React from "react";
 import { Character } from "../App";
 import styled from "styled-components";
-import { CharacterItem } from "./CharacterItem";
+import { Card } from "./Card";
+import { Link } from "react-router-dom";
 
 const CardsGrid = styled.div`
   display: grid;
@@ -12,13 +13,13 @@ const CardsGrid = styled.div`
   max-width: 960px;
 `;
 
-export const CharacterGrid: React.FC<{ characters: Character[] }> = ({
-  characters,
-}) => {
+export const Grid: React.FC<{ characters: Character[] }> = ({ characters }) => {
   return (
     <CardsGrid>
       {characters.map((character: any) => (
-        <CharacterItem character={character} />
+        <Link to={`/details/${character.name}`}>
+          <Card character={character} />
+        </Link>
       ))}
     </CardsGrid>
   );
