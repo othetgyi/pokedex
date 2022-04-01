@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-interface Character {
+export interface PokemonCardTypes {
   game_indices: {
     id: number;
   };
@@ -27,21 +27,21 @@ const StyledCard = styled.div`
   border-radius: 10px;
 `;
 
-export const PokemonImage = styled.img`
+const PokemonImage = styled.img`
   width: auto;
   max-height: 150px;
 `;
 
-export const Card: React.FC<{ character: Character }> = ({
-  character,
-}) => {
-    console.log("***character***", character); return (
+export const Card: React.FC<{ pokemon: PokemonCardTypes }> = ({ pokemon }) => {
+  console.log("***pokemon from Card***", pokemon);
+
+  return (
     <StyledCard>
       <PokemonImage
-        src={character.sprites.other.dream_world.front_default}
-        alt={character.name}
+        src={pokemon.sprites.other.dream_world.front_default}
+        alt={pokemon.name}
       />
-      <h3>{character.name}</h3>
+      <h3>{pokemon.name}</h3>
     </StyledCard>
-    );
+  );
 };

@@ -1,10 +1,9 @@
-import React from "react";
-import { Character } from "../App";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Card } from "./Card";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
-const CardsGrid = styled.div`
+const StyledGrid = styled.div`
   display: grid;
   align-items: center;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -13,14 +12,54 @@ const CardsGrid = styled.div`
   max-width: 960px;
 `;
 
-export const Grid: React.FC<{ characters: Character[] }> = ({ characters }) => {
+export type Pokemon = {
+  name: string;
+  url: string;
+};
+
+export const Grid: React.FC = () => {
+  const [allPokemon, setAllPokemon] = useState<Pokemon[]>([]);
+  const [loadMore, setLoadMore] = useState(
+    "https://pokeapi.co/api/v2/pokemon?limit=20"
+  );
+
+  const getPokemonList = async () => {
+    const response = await fetch(loadMore);
+    const pokemonListData = await response.json();
+    setLoadMore(pokemonListData.next);
+    console.log("***pokemonListData", pokemonListData);
+
+    const getPokemonData = (pokemonList: []) => {
+      pokemonList.forEach(async (pokemon: any) => {
+        const response = await fetch(
+          `https://pokeapi.co/api/v2/pokemon/${pokemon.name}`
+        );
+        const pokemonDataObject = await response.json();
+        console.log("***pokemonDataObject", pokemonDataObject);
+        setAllPokemon((currentList) => [...currentList, pokemonDataObject]);
+      });
+    };
+    getPokemonData(pokemonListData.results);
+  };
+
+  useEffect(() => {
+    getPokemonList();
+  }, []);
+
   return (
-    <CardsGrid>
-      {characters.map((character: any) => (
-        <Link to={`/details/${character.name}`}>
-          <Card character={character} />
-        </Link>
+    <StyledGrid>
+      {allPokemon.map((p: any) => (
+        <Card pokemon={p} key={p.key} />
       ))}
-    </CardsGrid>
+    </StyledGrid>
   );
 };
+
+// {
+/* <Link to={`/details/${character.name}`}></Link> */
+// }
+// interface characterData {
+//   id: string;
+//   name: string;
+//   sprite: string;
+// }
