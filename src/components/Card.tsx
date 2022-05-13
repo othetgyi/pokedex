@@ -42,13 +42,6 @@ const PokemonImage = styled.img`
   max-height: 150px;
 `;
 
-const HeightData = styled.div`
-  display: flex;
-  color: red;
-  font-size: 16px;
-  text-decoration: none;
-`;
-
 const StyledType = styled.div`
   display: flex;
   color: blue;
@@ -65,7 +58,6 @@ export const Card: React.FC<{ pokemon: PokemonCardTypes }> = ({ pokemon }) => {
         src={pokemon.sprites.other.dream_world.front_default}
         alt={pokemon.name}
       />
-      <HeightData>Height: {pokemon.height}</HeightData>
       <h3>{pokemon.name}</h3>
       <div>
         {pokemon.types.map((pokemon) => (
