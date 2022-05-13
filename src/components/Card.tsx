@@ -61,7 +61,7 @@ export const Card: React.FC<{ pokemon: PokemonCardTypes }> = ({ pokemon }) => {
       <h3>{pokemon.name}</h3>
       <div>
         {pokemon.types.map((pokemon) => (
-          <StyledType>Type: {pokemon.type.name}</StyledType>
+          <StyledType>{pokemon.type.name}</StyledType>
         ))}
       </div>
     </StyledCard>
