@@ -13,6 +13,16 @@ export interface PokemonCardTypes {
     };
   };
   name: string;
+  height: number;
+  types: [
+    {
+      slot: number;
+      type: {
+        name: string;
+        url: string;
+      };
+    }
+  ];
 }
 
 const StyledCard = styled.div`
@@ -20,7 +30,7 @@ const StyledCard = styled.div`
   background-color: #f5f5f5;
   font-size: 20px;
   font-family: "Gill Sans", sans-serif;
-  height: 200px;
+  height: 300px;
   padding: 5px;
   align-items: center;
   justify-content: center;
@@ -32,8 +42,22 @@ const PokemonImage = styled.img`
   max-height: 150px;
 `;
 
+const HeightData = styled.div`
+  display: flex;
+  color: red;
+  font-size: 16px;
+  text-decoration: none;
+`;
+
+const StyledType = styled.div`
+  display: flex;
+  color: blue;
+  font-size: 16px;
+`;
 export const Card: React.FC<{ pokemon: PokemonCardTypes }> = ({ pokemon }) => {
   console.log("***pokemon from Card***", pokemon);
+  const pokemonTypes = pokemon.types;
+  console.log("****pokemonTypes", pokemonTypes);
 
   return (
     <StyledCard>
@@ -41,7 +65,13 @@ export const Card: React.FC<{ pokemon: PokemonCardTypes }> = ({ pokemon }) => {
         src={pokemon.sprites.other.dream_world.front_default}
         alt={pokemon.name}
       />
+      <HeightData>Height: {pokemon.height}</HeightData>
       <h3>{pokemon.name}</h3>
+      <div>
+        {pokemon.types.map((pokemon) => (
+          <StyledType>Type: {pokemon.type.name}</StyledType>
+        ))}
+      </div>
     </StyledCard>
   );
 };

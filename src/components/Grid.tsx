@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Card } from "./Card";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const StyledGrid = styled.div`
   display: grid;
@@ -49,17 +49,10 @@ export const Grid: React.FC = () => {
   return (
     <StyledGrid>
       {allPokemon.map((p: any) => (
-        <Card pokemon={p} key={p.key} />
+        <Link to={`/details/${p.name}`}>
+          <Card pokemon={p} key={p.key} />
+        </Link>
       ))}
     </StyledGrid>
   );
 };
-
-// {
-/* <Link to={`/details/${character.name}`}></Link> */
-// }
-// interface characterData {
-//   id: string;
-//   name: string;
-//   sprite: string;
-// }
