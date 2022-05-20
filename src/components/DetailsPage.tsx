@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from 'react-router-dom';
-interface Character {
+import { useParams } from "react-router-dom";
+
+import {
+  StyledTypeBadgeContainer,
+  TypeBadge,
+  PokemonTypeBadgeTypes,
+} from "./TypeBadge";
+interface OnePokemonTypes {
   game_indices: {
     id: number;
   };
@@ -12,41 +18,40 @@ interface Character {
     };
   };
   name: string;
+  types: PokemonTypeBadgeTypes[];
 }
 
 export const DetailsPage: React.FC = () => {
-  const [character, setCharacter] = useState<Partial<Character>>({});
+  const [pokemon, setPokemon] = useState<Partial<OnePokemonTypes>>({});
 
   const params = useParams();
-  
+
   useEffect(() => {
-    // fetchCharacter();
-    const fetchCharacter = async () => {
-      const fetchCharacter = await fetch(`https://pokeapi.co/api/v2/pokemon/${params.name}`);
-      const character = await fetchCharacter.json();
-      setCharacter(character);
-      console.log('character', character);
-     }
-     fetchCharacter()
-  }, [params.name])
-
-  
-
-//  const fetchCharacter = async () => {
-//    const fetchCharacter = await fetch(`https://pokeapi.co/api/v2/pokemon/${params.name}`);
-//    const character = await fetchCharacter.json();
-//    setCharacter(character);
-//    console.log(character);
-//   };
+    const getOnePokemon = async () => {
+      const apiResponse = await fetch(
+        `https://pokeapi.co/api/v2/pokemon/${params.name}`
+      );
+      const onePokemonDataObject = await apiResponse.json();
+      setPokemon(onePokemonDataObject);
+      console.log("onePokemonDataObject", onePokemonDataObject);
+    };
+    getOnePokemon();
+  }, [params.name]);
 
   return (
     <div>
-      <h1>{character.name}</h1>
+      <h1>{pokemon.name}</h1>
       <img
-        src={character.sprites && character!.sprites!.other!.dream_world!.front_default}
-        alt={character!.name}
+        src={
+          pokemon.sprites && pokemon!.sprites!.other!.dream_world!.front_default
+        }
+        alt={pokemon!.name}
       />
+      <StyledTypeBadgeContainer>
+        {pokemon.types?.map((typeIndex) => (
+          <TypeBadge type={typeIndex.type.name}></TypeBadge>
+        ))}
+      </StyledTypeBadgeContainer>
     </div>
-  )
-}
-
+  );
+};

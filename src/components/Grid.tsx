@@ -12,6 +12,30 @@ const StyledGrid = styled.div`
   max-width: 960px;
 `;
 
+const StyledButton = styled.button`
+  width: 140px;
+  height: 50px;
+  font-family: "Arial";
+  border-radius: 5px;
+  background-color: #30a7d7;
+  color: white;
+  border: none;
+  font-size: 18px;
+`;
+
+const StyledButtonContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+`;
+
+const HomePage = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
 export type Pokemon = {
   name: string;
   url: string;
@@ -20,13 +44,15 @@ export type Pokemon = {
 export const Grid: React.FC = () => {
   const [allPokemon, setAllPokemon] = useState<Pokemon[]>([]);
   const [loadMore, setLoadMore] = useState(
-    "https://pokeapi.co/api/v2/pokemon?limit=20"
+    "https://pokeapi.co/api/v2/pokemon?limit=12"
   );
 
   const getPokemonList = async () => {
     const response = await fetch(loadMore);
     const pokemonListData = await response.json();
+
     setLoadMore(pokemonListData.next);
+
     console.log("***pokemonListData", pokemonListData);
 
     const getPokemonData = (pokemonList: []) => {
@@ -47,12 +73,19 @@ export const Grid: React.FC = () => {
   }, []);
 
   return (
-    <StyledGrid>
-      {allPokemon.map((p: any) => (
-        <Link to={`/details/${p.name}`} style={{ textDecoration: "none" }}>
-          <Card pokemon={p} key={p.key} />
-        </Link>
-      ))}
-    </StyledGrid>
+    <HomePage>
+      <StyledGrid>
+        {allPokemon.map((p: any) => (
+          <Link to={`/details/${p.name}`} style={{ textDecoration: "none" }}>
+            <Card pokemon={p} key={p.key} />
+          </Link>
+        ))}
+      </StyledGrid>
+      <StyledButtonContainer>
+        <StyledButton onClick={() => getPokemonList()}>
+          Load more Pokemon
+        </StyledButton>
+      </StyledButtonContainer>
+    </HomePage>
   );
 };

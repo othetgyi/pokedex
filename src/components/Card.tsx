@@ -40,12 +40,6 @@ const PokemonImage = styled.img`
   max-height: 150px;
 `;
 
-// const StyledType = styled.div`
-//   display: flex;
-//   color: blue;
-//   font-size: 16px;
-//   text-decoration: none;
-// `;
 export const Card: React.FC<{ pokemon: PokemonCardTypes }> = ({ pokemon }) => {
   console.log("***pokemon from Card***", pokemon);
   const pokemonTypes = pokemon.types;
