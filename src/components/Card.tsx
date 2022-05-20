@@ -1,6 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import { TypeBadgeContainer, PokemonTypeBadgeTypes } from "./TypeBadge";
+import {
+  StyledTypeBadgeContainer,
+  TypeBadge,
+  PokemonTypeBadgeTypes,
+} from "./TypeBadge";
 
 export interface PokemonCardTypes {
   game_indices: {
@@ -19,11 +23,12 @@ export interface PokemonCardTypes {
 }
 
 const StyledCard = styled.div`
-  display: grid;
+  display: flex;
+  flex-direction: column;
   background-color: #f5f5f5;
   font-size: 20px;
   font-family: "Gill Sans", sans-serif;
-  height: 500px;
+  height: 300px;
   padding: 5px;
   align-items: center;
   justify-content: center;
@@ -53,11 +58,11 @@ export const Card: React.FC<{ pokemon: PokemonCardTypes }> = ({ pokemon }) => {
         alt={pokemon.name}
       />
       <h3>{pokemon.name}</h3>
-      <div>
+      <StyledTypeBadgeContainer>
         {pokemon.types?.map((typeIndex) => (
-          <TypeBadgeContainer type={typeIndex.type.name}></TypeBadgeContainer>
+          <TypeBadge type={typeIndex.type.name}></TypeBadge>
         ))}
-      </div>
+      </StyledTypeBadgeContainer>
     </StyledCard>
   );
 };

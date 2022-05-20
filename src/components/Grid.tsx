@@ -49,7 +49,7 @@ export const Grid: React.FC = () => {
   return (
     <StyledGrid>
       {allPokemon.map((p: any) => (
-        <Link to={`/details/${p.name}`}>
+        <Link to={`/details/${p.name}`} style={{ textDecoration: "none" }}>
           <Card pokemon={p} key={p.key} />
         </Link>
       ))}

@@ -7,15 +7,19 @@ export interface PokemonTypeBadgeTypes {
   };
 }
 
-const StyledTypeBadgeContainer = styled.div`
+export const StyledTypeBadgeContainer = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
 `;
 
 const StyledTypeBadge = styled.div`
-  height: 60px;
-  width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  width: 70px;
   background-color: yellow;
   border-radius: 10px;
 `;
@@ -30,13 +34,5 @@ export const TypeBadge: React.FC<{ type: string }> = ({ type }) => {
     <StyledTypeBadge>
       <StyledTypeBadgeText>{type}</StyledTypeBadgeText>
     </StyledTypeBadge>
-  );
-};
-
-export const TypeBadgeContainer: React.FC<{ type: string }> = ({ type }) => {
-  return (
-    <StyledTypeBadgeContainer>
-      <TypeBadge type={type} />
-    </StyledTypeBadgeContainer>
   );
 };
