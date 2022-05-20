@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { TypeBadgeContainer, PokemonTypeBadgeTypes } from "./TypeBadge";
 
 export interface PokemonCardTypes {
   game_indices: {
@@ -14,15 +15,7 @@ export interface PokemonCardTypes {
   };
   name: string;
   height: number;
-  types: [
-    {
-      slot: number;
-      type: {
-        name: string;
-        url: string;
-      };
-    }
-  ];
+  types: PokemonTypeBadgeTypes[];
 }
 
 const StyledCard = styled.div`
@@ -30,7 +23,7 @@ const StyledCard = styled.div`
   background-color: #f5f5f5;
   font-size: 20px;
   font-family: "Gill Sans", sans-serif;
-  height: 300px;
+  height: 500px;
   padding: 5px;
   align-items: center;
   justify-content: center;
@@ -42,11 +35,12 @@ const PokemonImage = styled.img`
   max-height: 150px;
 `;
 
-const StyledType = styled.div`
-  display: flex;
-  color: blue;
-  font-size: 16px;
-`;
+// const StyledType = styled.div`
+//   display: flex;
+//   color: blue;
+//   font-size: 16px;
+//   text-decoration: none;
+// `;
 export const Card: React.FC<{ pokemon: PokemonCardTypes }> = ({ pokemon }) => {
   console.log("***pokemon from Card***", pokemon);
   const pokemonTypes = pokemon.types;
@@ -60,8 +54,8 @@ export const Card: React.FC<{ pokemon: PokemonCardTypes }> = ({ pokemon }) => {
       />
       <h3>{pokemon.name}</h3>
       <div>
-        {pokemon.types.map((typeIndex) => (
-          <StyledType>{typeIndex.type.name}</StyledType>
+        {pokemon.types?.map((typeIndex) => (
+          <TypeBadgeContainer type={typeIndex.type.name}></TypeBadgeContainer>
         ))}
       </div>
     </StyledCard>
