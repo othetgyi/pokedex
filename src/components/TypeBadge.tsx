@@ -11,7 +11,8 @@ export const StyledTypeBadgeContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 100%;
+  width: 150px;
+  padding: 10px;
 `;
 
 const matchTypeToColour = (type: string) => {
