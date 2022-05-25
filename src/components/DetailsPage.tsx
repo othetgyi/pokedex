@@ -32,8 +32,15 @@ interface FlavorTypes {
   flavor_text: string;
 }
 
+interface GeneraTypes {
+  genus: string;
+  language: {
+    name: string;
+  };
+}
 interface PokemonSpeciesTypes {
   flavor_text_entries: FlavorTypes[];
+  genera: GeneraTypes[];
 }
 
 const Container = styled.div`
@@ -104,10 +111,21 @@ export const DetailsPage: React.FC = () => {
 
   const height = pokemon.height ?? 0;
   const weight = pokemon.weight ?? 0;
+  const genera = description.genera;
+  console.log("genera", genera);
   const name = pokemon.name && pokemon.name;
   const uppercaseName = (name: string) => {
     return name && name.charAt(0).toUpperCase() + name!.slice(1);
   };
+
+  const filtering =
+    description.genera &&
+    description.genera.filter((item) => {
+      return item.language.name === "en";
+    });
+  console.log("filtering", filtering);
+  const genus = filtering && filtering[0].genus;
+  console.log("genus", genus);
 
   return (
     <Container>
@@ -131,7 +149,7 @@ export const DetailsPage: React.FC = () => {
             </DescriptionText>
           </DescriptionContainer>
           <StyledSizeDescriptionContainer>
-            <SizeData height={height} weight={weight} />
+            <SizeData height={height} weight={weight} genus={genus!} />
           </StyledSizeDescriptionContainer>
         </SizeAndDescriptionContainer>
       </ImageAndDescriptionContainer>

@@ -27,12 +27,15 @@ const StyledSizeDataText = styled.p`
   font-size: 18px;
 `;
 
-export const SizeData: React.FC<{ height: number; weight: number }> = ({
-  height,
-  weight,
-}) => {
+export const SizeData: React.FC<{
+  height: number;
+  weight: number;
+  genus: string;
+}> = ({ height, weight, genus }) => {
   return (
     <SizeDataContainer>
+      <StyledSizeCategoryText>Category</StyledSizeCategoryText>
+      <StyledSizeDataText>{genus}</StyledSizeDataText>
       <StyledSizeCategoryText>Height</StyledSizeCategoryText>
       <StyledSizeDataText>{`${height / 10}m`}</StyledSizeDataText>
       <StyledSizeCategoryText>Weight</StyledSizeCategoryText>
