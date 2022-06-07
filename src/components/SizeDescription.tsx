@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 
-export const StyledSizeDescriptionContainer = styled.div`
+export const DetailsContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-
+  width: 100%;
   background-color: #30a7d7;
   border-radius: 10px;
   padding: 10px;
@@ -15,13 +15,14 @@ export const SizeDataContainer = styled.div`
   width: 250px;
 `;
 
-const StyledSizeCategoryText = styled.p`
+export const StyledSizeCategoryText = styled.p`
   color: white;
   font-family: "Arial";
   font-size: 18px;
+  margin: 0;
 `;
 
-const StyledSizeDataText = styled.p`
+export const StyledSizeDataText = styled.p`
   color: black;
   font-family: "Arial";
   font-size: 18px;
@@ -33,13 +34,15 @@ export const SizeData: React.FC<{
   genus: string;
 }> = ({ height, weight, genus }) => {
   return (
-    <SizeDataContainer>
+    // <SizeDataContainer>
+    <div>
       <StyledSizeCategoryText>Category</StyledSizeCategoryText>
       <StyledSizeDataText>{genus}</StyledSizeDataText>
       <StyledSizeCategoryText>Height</StyledSizeCategoryText>
       <StyledSizeDataText>{`${height / 10}m`}</StyledSizeDataText>
       <StyledSizeCategoryText>Weight</StyledSizeCategoryText>
       <StyledSizeDataText>{`${weight / 10}kg`} </StyledSizeDataText>
-    </SizeDataContainer>
+    </div>
+    // </SizeDataContainer>
   );
 };

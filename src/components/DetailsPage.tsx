@@ -9,7 +9,11 @@ import {
 } from "./TypeBadge";
 import { DescriptionContainer, DescriptionText } from "./Description";
 
-import { SizeData, StyledSizeDescriptionContainer } from "./SizeDescription";
+import {
+  SizeData,
+  DetailsContainer,
+  StyledSizeCategoryText,
+} from "./SizeDescription";
 
 interface OnePokemonTypes {
   game_indices: {
@@ -26,8 +30,14 @@ interface OnePokemonTypes {
   types: PokemonTypeBadgeTypes[];
   height: number;
   weight: number;
+  abilities: AbilitiesTypes[];
 }
 
+export interface AbilitiesTypes {
+  ability: {
+    name: string;
+  };
+}
 interface FlavorTypes {
   flavor_text: string;
 }
@@ -59,7 +69,7 @@ const ImageContainer = styled.div`
   display: flex;
   flex-direction: column;
   background-color: #f5f5f5;
-  width: 300px;
+  width: 400px;
   height: 300px;
   padding: 5px;
   align-items: center;
@@ -71,12 +81,32 @@ const ImageAndDescriptionContainer = styled.div`
   display: flex;
   flex-direction: row;
 `;
-const SizeAndDescriptionContainer = styled.div`
+const DescriptionAndDetailsContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 300px;
+  width: 400px;
   justify-content: center;
   align-items: center;
+  padding: 10px;
+`;
+const AbilitiesContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  padding: 10px;
+`;
+
+const AbilitiesText = styled.p`
+  color: black;
+  font-family: "Arial";
+  font-size: 18px;
+  margin: 5px 0;
+`;
+const CategoryAndSizeContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  padding: 10px;
 `;
 
 export const DetailsPage: React.FC = () => {
@@ -118,14 +148,17 @@ export const DetailsPage: React.FC = () => {
     return name && name.charAt(0).toUpperCase() + name!.slice(1);
   };
 
-  const filtering =
+  const filterGenera =
     description.genera &&
     description.genera.filter((item) => {
       return item.language.name === "en";
     });
-  console.log("filtering", filtering);
-  const genus = filtering && filtering[0].genus;
+  console.log("filtering", filterGenera);
+  const genus = filterGenera && filterGenera[0].genus;
   console.log("genus", genus);
+
+  const abilities = pokemon.abilities;
+  console.log("***abilities***", abilities);
 
   return (
     <Container>
@@ -141,17 +174,26 @@ export const DetailsPage: React.FC = () => {
           />
         </ImageContainer>
 
-        <SizeAndDescriptionContainer>
+        <DescriptionAndDetailsContainer>
           <DescriptionContainer>
             <DescriptionText>
               {description.flavor_text_entries &&
                 description.flavor_text_entries[0].flavor_text}
             </DescriptionText>
           </DescriptionContainer>
-          <StyledSizeDescriptionContainer>
-            <SizeData height={height} weight={weight} genus={genus!} />
-          </StyledSizeDescriptionContainer>
-        </SizeAndDescriptionContainer>
+          <DetailsContainer>
+            <CategoryAndSizeContainer>
+              <SizeData height={height} weight={weight} genus={genus!} />
+            </CategoryAndSizeContainer>
+            <AbilitiesContainer>
+              <StyledSizeCategoryText>Abilities</StyledSizeCategoryText>
+
+              {pokemon.abilities?.map((abilityIndex) => (
+                <AbilitiesText>{abilityIndex.ability.name}&nbsp;</AbilitiesText>
+              ))}
+            </AbilitiesContainer>
+          </DetailsContainer>
+        </DescriptionAndDetailsContainer>
       </ImageAndDescriptionContainer>
       <StyledTypeBadgeContainer>
         {pokemon.types?.map((typeIndex) => (
