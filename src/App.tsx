@@ -1,8 +1,8 @@
 import "./App.css";
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import { Grid } from "./components/Grid";
-import { DetailsPage } from "./components/DetailsPage";
+import { Grid } from "./ui/components/Grid";
+import { DetailsPage } from "./ui/components/DetailsPage";
 
 const App = () => {
   return (
