@@ -12,16 +12,7 @@ const StyledGrid = styled.div`
   max-width: 960px;
 `;
 
-const StyledButton = styled.button`
-  width: 140px;
-  height: 50px;
-  font-family: "Arial";
-  border-radius: 5px;
-  background-color: #30a7d7;
-  color: white;
-  border: none;
-  font-size: 18px;
-`;
+
 
 const StyledButtonContainer = styled.div`
   display: flex;
@@ -30,11 +21,7 @@ const StyledButtonContainer = styled.div`
   padding: 20px;
 `;
 
-const HomePage = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
+
 
 export type Pokemon = {
   name: string;
@@ -73,7 +60,7 @@ export const Grid: React.FC = () => {
   }, []);
 
   return (
-    <HomePage>
+    <div>
       <StyledGrid>
         {allPokemon.map((p: any) => (
           <Link to={`/details/${p.name}`} style={{ textDecoration: "none" }}>
@@ -82,10 +69,10 @@ export const Grid: React.FC = () => {
         ))}
       </StyledGrid>
       <StyledButtonContainer>
-        <StyledButton onClick={() => getPokemonList()}>
+        {/* <StyledButton onClick={() => getPokemonList()}>
           Load more Pokemon
-        </StyledButton>
+        </StyledButton> */}
       </StyledButtonContainer>
-    </HomePage>
+    </div>
   );
 };
