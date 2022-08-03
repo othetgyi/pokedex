@@ -1,38 +1,28 @@
+import axios from "axios";
+import MockAdapter from "axios-mock-adapter";
 import { getPokemonList } from "./HTTPPokemonDataRepository";
 
-const mockSuccessResponse = [
-  {
-    name: "bulbasaur",
-    url: "https://pokeapi.co/api/v2/pokemon/1/",
-  },
-];
+describe("HTTPPokemonDataRepository", () => {
+  const mockAdapter = new MockAdapter(axios);
 
-// global.fetch = jest.fn(() =>
-//   Promise.resolve({
-//     json: () => Promise.resolve(mockSuccessResponse),
-//   })
-// ) as jest.Mock;
-
-// beforeEach(() => {
-//   jest.resetAllMocks();
-// });
-
-beforeEach(() => {
-  jest.spyOn(global, "fetch").mockResolvedValue({
-    json: jest.fn().mockResolvedValue(mockSuccessResponse),
+  describe("getPokemonList", () => {
+    it("returns Pokemon data", async () => {
+      mockAdapter
+        .onGet("https://pokeapi.co/api/v2/pokemon?limit=12")
+        .reply(200, {
+          results: [
+            {
+              name: "mock Pokemon",
+              url: "https://fakePokemonUrl.com",
+            },
+          ],
+        });
+      expect(await getPokemonList()).toEqual([
+        {
+          name: "mock Pokemon",
+          url: "https://fakePokemonUrl.com",
+        },
+      ]);
+    });
   });
-}) as jest.Mock;
-
-afterEach(() => {
-  jest.restoreAllMocks();
-});
-
-it("returns Pokemon data", async () => {
-  const pokemonList = await getPokemonList();
-  console.log("***pokemonList in unit test***", pokemonList);
-
-  expect(pokemonList).toEqual([
-    { name: "bulbasaur", url: "https://pokeapi.co/api/v2/pokemon/1/" },
-  ]);
-  expect(fetch).toHaveBeenCalledTimes(1);
 });

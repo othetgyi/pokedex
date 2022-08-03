@@ -1,12 +1,16 @@
+import axios from "axios";
+
 export const getPokemonList = async () => {
   try {
-    const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=12");
-    const pokemonListData = await response.json();
+    const response = await axios.get(
+      "https://pokeapi.co/api/v2/pokemon?limit=12"
+    );
+    console.log("***response***", response);
+    console.log("***response.data***", response.data);
+    console.log("***response.data.results***", response.data.results);
 
-    console.log("***pokemonListData***", pokemonListData);
-    console.log("***pokemonListData.results***", pokemonListData.results);
     console.log("***Im in the try block!***");
-    return pokemonListData.results;
+    return response.data.results;
   } catch (error) {
     console.log("***Im in the catch block!***");
     return null;
