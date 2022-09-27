@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { getPokemonList } from "../../infrastructure/HTTPPokemonDataRepository";
+import { Grid } from "./Grid";
 
 const HomepageContainer = styled.div`
   display: flex;
@@ -26,10 +26,10 @@ const LoadMoreButton = styled.button`
 `;
 
 export const Homepage = () => {
-  getPokemonList();
   return (
     <HomepageContainer>
       <Title>Pokédex</Title>
+      <Grid />
       <LoadMoreButton>Load more Pokémon</LoadMoreButton>
     </HomepageContainer>
   );
