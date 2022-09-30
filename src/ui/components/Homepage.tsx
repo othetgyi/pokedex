@@ -5,6 +5,7 @@ const HomepageContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: #dedede;
 `;
 
 const Title = styled.h1`

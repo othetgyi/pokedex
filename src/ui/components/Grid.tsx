@@ -10,7 +10,8 @@ const StyledGrid = styled.div`
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   grid-gap: 1rem;
   margin: 0 auto;
-  max-width: 960px;
+  max-width: 90%;
+  background-color: white;
 `;
 
 const StyledButtonContainer = styled.div`
@@ -66,6 +67,7 @@ export const Grid: React.FC = () => {
             <Card pokemon={p} key={p.key} />
           </Link>
         ))} */}
+        blah blah
       </StyledGrid>
       <StyledButtonContainer>
         {/* <StyledButton onClick={() => getPokemonList()}>

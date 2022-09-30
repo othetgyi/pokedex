@@ -8,15 +8,11 @@ describe("Homepage", () => {
   const getPokemonList = () => Promise.resolve({ name: "mockPokemon" });
 
   it("displays the title", () => {
-    render(<Homepage />);
+    view = render(<Homepage />);
     expect(screen.getByText("Pokédex")).toBeVisible();
   });
   it("displays a Load More Pokémon button", () => {
     render(<Homepage />);
-    expect(screen.queryByText("Load more Pokémon")).toBeInTheDocument();
-  });
-  it("displays the names of pokemon", () => {
-    render(<Homepage />);
-    expect(screen.getByText("mockPokemon")).toBeVisible();
+    expect(screen.getByText("Load more Pokémon")).toBeInTheDocument();
   });
 });
