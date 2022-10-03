@@ -27,7 +27,6 @@ export type Pokemon = {
 };
 
 export const Grid: React.FC = () => {
-  getPokemonList();
   const [pokemonArray, setPokemonArray] = useState([]);
 
   // const [loadMore, setLoadMore] = useState(
@@ -55,25 +54,19 @@ export const Grid: React.FC = () => {
   //   getPokemonData(pokemonListData.results);
   // };
 
-  // useEffect(() => {
-  //   getPokemonList();
-  // }, []);
+  useEffect(() => {
+    getPokemonList();
+  }, []);
 
   return (
     <div>
       <StyledGrid>
-        {/* {allPokemon.map((p: any) => (
+        {pokemonArray.map((p: any) => (
           <Link to={`/details/${p.name}`} style={{ textDecoration: "none" }}>
             <Card pokemon={p} key={p.key} />
           </Link>
-        ))} */}
-        blah blah
+        ))}
       </StyledGrid>
-      <StyledButtonContainer>
-        {/* <StyledButton onClick={() => getPokemonList()}>
-          Load more Pokemon
-        </StyledButton> */}
-      </StyledButtonContainer>
     </div>
   );
 };

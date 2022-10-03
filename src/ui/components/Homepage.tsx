@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Grid } from "./Grid";
+import { TypeBadge } from "./TypeBadge";
 
 const HomepageContainer = styled.div`
   display: flex;
@@ -30,8 +31,14 @@ export const Homepage = () => {
   return (
     <HomepageContainer>
       <Title>Pokédex</Title>
-      <Grid />
+      {/* <Grid /> */}
+      <TypeBadge type="fire" />
       <LoadMoreButton>Load more Pokémon</LoadMoreButton>
+      {/* <StyledButtonContainer>
+        <StyledButton onClick={() => getPokemonList()}>
+          Load more Pokemon
+        </StyledButton>
+      </StyledButtonContainer> */}
     </HomepageContainer>
   );
 };

@@ -2,11 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 
-import {
-  StyledTypeBadgeContainer,
-  TypeBadge,
-  PokemonTypeBadgeTypes,
-} from "./TypeBadge";
+import { TypeBadge } from "./TypeBadge";
 import { DescriptionContainer, DescriptionText } from "./Description";
 
 import {
@@ -27,7 +23,11 @@ interface OnePokemonTypes {
     };
   };
   name: string;
-  types: PokemonTypeBadgeTypes[];
+  types: {
+    type: {
+      name: string;
+    };
+  };
   height: number;
   weight: number;
   abilities: AbilitiesTypes[];
@@ -52,6 +52,14 @@ interface PokemonSpeciesTypes {
   flavor_text_entries: FlavorTypes[];
   genera: GeneraTypes[];
 }
+
+export const StyledTypeBadgeContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 150px;
+  padding: 10px;
+`;
 
 const Container = styled.div`
   display: flex;
@@ -196,9 +204,9 @@ export const DetailsPage: React.FC = () => {
         </DescriptionAndDetailsContainer>
       </ImageAndDescriptionContainer>
       <StyledTypeBadgeContainer>
-        {pokemon.types?.map((typeIndex) => (
+        {/* {pokemon.types?.map((typeIndex) => (
           <TypeBadge type={typeIndex.type.name}></TypeBadge>
-        ))}
+        ))} */}
       </StyledTypeBadgeContainer>
     </Container>
   );

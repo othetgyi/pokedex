@@ -1,28 +1,17 @@
 import React from "react";
 import styled from "styled-components";
-import {
-  StyledTypeBadgeContainer,
-  TypeBadge,
-  PokemonTypeBadgeTypes,
-} from "./TypeBadge";
+import { TypeBadge } from "./TypeBadge";
+import { PokemonCardTypes } from "./CardTypes";
 
-export interface PokemonCardTypes {
-  game_indices: {
-    id: number;
-  };
-  sprites: {
-    other: {
-      dream_world: {
-        front_default: string;
-      };
-    };
-  };
-  name: string;
-  height: number;
-  types: PokemonTypeBadgeTypes[];
-}
+export const StyledTypeBadgeContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 150px;
+  padding: 10px;
+`;
 
-const StyledCard = styled.div`
+const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
   background-color: #f5f5f5;
@@ -46,17 +35,17 @@ export const Card: React.FC<{ pokemon: PokemonCardTypes }> = ({ pokemon }) => {
   console.log("****pokemonTypes", pokemonTypes);
 
   return (
-    <StyledCard>
+    <CardContainer>
       <PokemonImage
         src={pokemon.sprites.other.dream_world.front_default}
         alt={pokemon.name}
       />
       <h3>{pokemon.name}</h3>
       <StyledTypeBadgeContainer>
-        {pokemon.types?.map((typeIndex) => (
+        {/* {pokemon.types?.map((typeIndex) => (
           <TypeBadge type={typeIndex.type.name}></TypeBadge>
-        ))}
+        ))} */}
       </StyledTypeBadgeContainer>
-    </StyledCard>
+    </CardContainer>
   );
 };

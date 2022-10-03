@@ -1,20 +1,6 @@
 import React from "react";
 import styled, { css } from "styled-components";
 
-export interface PokemonTypeBadgeTypes {
-  type: {
-    name: string;
-  };
-}
-
-export const StyledTypeBadgeContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 150px;
-  padding: 10px;
-`;
-
 const matchTypeToColour = (type: string) => {
   switch (type) {
     case "normal":
@@ -96,7 +82,7 @@ const matchTypeToColour = (type: string) => {
   }
 };
 
-const StyledTypeBadge = styled.div<{ type: string }>`
+const TypeBadgeContainer = styled.div<{ type: string }>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -106,15 +92,15 @@ const StyledTypeBadge = styled.div<{ type: string }>`
   ${({ type }) => matchTypeToColour(type)}
 `;
 
-const StyledTypeBadgeText = styled.p`
+const TypeBadgeText = styled.p`
   color: white;
   font-family: "Arial";
 `;
 
 export const TypeBadge: React.FC<{ type: string }> = ({ type }) => {
   return (
-    <StyledTypeBadge type={type}>
-      <StyledTypeBadgeText>{type}</StyledTypeBadgeText>
-    </StyledTypeBadge>
+    <TypeBadgeContainer type={type}>
+      <TypeBadgeText>{type}</TypeBadgeText>
+    </TypeBadgeContainer>
   );
 };
