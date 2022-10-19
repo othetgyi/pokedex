@@ -28,7 +28,7 @@ export const StyledSizeDataText = styled.p`
   font-size: 18px;
 `;
 
-export const SizeData: React.FC<{
+export const StatisticsCard: React.FC<{
   height: number;
   weight: number;
   genus: string;

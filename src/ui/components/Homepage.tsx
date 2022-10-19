@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Grid } from "./Grid";
 import { TypeBadge } from "./TypeBadge";
+import { DescriptionComponent } from "./DescriptionComponent";
 
 const HomepageContainer = styled.div`
   display: flex;
@@ -32,6 +33,7 @@ export const Homepage = () => {
     <HomepageContainer>
       <Title>Pokédex</Title>
       {/* <Grid /> */}
+      <DescriptionComponent description="Some Pokemon description"/> 
       <TypeBadge type="fire" />
       <LoadMoreButton>Load more Pokémon</LoadMoreButton>
       {/* <StyledButtonContainer>

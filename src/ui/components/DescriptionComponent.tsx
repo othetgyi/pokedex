@@ -14,3 +14,13 @@ export const DescriptionText = styled.p`
   font-size: 18px;
   line-height: 20px;
 `;
+
+export const DescriptionComponent: React.FC<{description: string}> = ({description}) => {
+ return (
+ <DescriptionContainer>
+    <DescriptionText>
+    {description}
+    </DescriptionText>
+  </DescriptionContainer>
+  )
+}

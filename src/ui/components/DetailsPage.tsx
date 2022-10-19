@@ -3,13 +3,13 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 
 import { TypeBadge } from "./TypeBadge";
-import { DescriptionContainer, DescriptionText } from "./Description";
+import { DescriptionContainer, DescriptionText } from "./DescriptionComponent";
 
 import {
   SizeData,
   DetailsContainer,
   StyledSizeCategoryText,
-} from "./SizeDescription";
+} from "./StatisticsCard";
 
 interface OnePokemonTypes {
   game_indices: {
