@@ -99,7 +99,7 @@ const TypeBadgeText = styled.p`
 
 export const TypeBadge: React.FC<{ type: string }> = ({ type }) => {
   return (
-    <TypeBadgeContainer type={type}>
+    <TypeBadgeContainer type={type} data-testid="background">
       <TypeBadgeText>{type}</TypeBadgeText>
     </TypeBadgeContainer>
   );

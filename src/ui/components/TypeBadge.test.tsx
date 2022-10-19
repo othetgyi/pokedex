@@ -7,7 +7,7 @@ describe("Type badge", () => {
     expect(screen.getByText("fire")).toBeVisible();
   });
   it("shows the correct background colour based on the type", () => {
-    const { container } = render(<TypeBadge type="fire" />);
-    expect(container.firstChild).toHaveStyle(`background: #f08030`);
+    render(<TypeBadge type="fire" />);
+    expect(screen.getByTestId('background')).toHaveStyle(`background: #f08030`);
   });
 });
