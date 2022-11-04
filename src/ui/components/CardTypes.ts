@@ -10,7 +10,6 @@ export interface PokemonCardTypes {
     };
   };
   name: string;
-  height: number;
   types: {
     type: {
       name: string;

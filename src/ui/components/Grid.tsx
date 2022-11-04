@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 import { getPokemonList } from "../../infrastructure/HTTPPokemonDataRepository";
-
 import { Card } from "./Card";
-import { Link } from "react-router-dom";
+import { PokemonCardTypes } from "./CardTypes";
+
 
 const StyledGrid = styled.div`
   display: grid;
@@ -43,11 +44,10 @@ const LoadMoreButton = styled.button`
 export const Grid: React.FC = () => {
   const limit = 12;
   const [offset, setOffset] = useState<number>(0);
-  const [pokemonArray, setPokemonArray] = useState<Pokemon[]>([]);
+  const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
 
   /*const [allPokemonData, setAllPokemonData] = useState([]);
 
-  const pokemonList = getPokemonList();
   const allPokemonNames = setAllPokemonData(pokemonList.data)
 
   allPokemonNames.map( pokemon => { 
@@ -86,21 +86,21 @@ export const Grid: React.FC = () => {
   useEffect(() => {
     const getList = async () => {
       const data:Pokemon[] = await getPokemonList(limit, offset);
-      setPokemonArray(currentState => [...currentState, ...data]);
+      setPokemonList(currentState => [...currentState, ...data]);
     }
     getList();
   }, [offset]);
 
   useEffect(() => {
     const getPokemon = async () => {
-      const unloaded = pokemonArray.filter((pokemon) => allPokemonData.find( pokemon.name));
+      const unloaded = pokemonList.filter(() => pokemonList.find(pokemon => pokemon.name));
       if (unloaded.length > 0){
       // const data:Pokemon[] = await getPokemonData(unloaded[0].url);
       // setAllPokemonData(currentState => [...currentState, ...data]);
       }
     }
     getPokemon();
-  }, [pokemonArray, allPokemonData]);
+  }, [pokemonList]);
 
   const getMorePokemon = () => {
     setOffset(offset + limit)
@@ -109,7 +109,7 @@ export const Grid: React.FC = () => {
   return (
     <div>
       <StyledGrid>
-        {pokemonArray.map((p: Pokemon) => (
+        {pokemonList.map((p: Pokemon) => (
           <Link key={p.name} to={`/details/${p.name}`} style={{ textDecoration: "none" }}>
             {/*<Card pokemon={p} key={p.key} />*/}
             {p.name}

@@ -22,8 +22,6 @@ export const Homepage = () => {
     <HomepageContainer>
       <Title>Pokédex</Title>
       <Grid />
-      <DescriptionComponent description="Some Pokemon description"/> 
-      <TypeBadge type="fire" />
     </HomepageContainer>
   );
 };
