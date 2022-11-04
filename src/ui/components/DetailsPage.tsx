@@ -6,7 +6,6 @@ import { TypeBadge } from "./TypeBadge";
 import { DescriptionContainer, DescriptionText } from "./DescriptionComponent";
 
 import {
-  SizeData,
   DetailsContainer,
   StyledSizeCategoryText,
 } from "./StatisticsCard";
@@ -191,7 +190,7 @@ export const DetailsPage: React.FC = () => {
           </DescriptionContainer>
           <DetailsContainer>
             <CategoryAndSizeContainer>
-              <SizeData height={height} weight={weight} genus={genus!} />
+              {/* <SizeData height={height} weight={weight} genus={genus!} /> */}
             </CategoryAndSizeContainer>
             <AbilitiesContainer>
               <StyledSizeCategoryText>Abilities</StyledSizeCategoryText>

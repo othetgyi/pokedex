@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+
 import { getPokemonList } from "../../infrastructure/HTTPPokemonDataRepository";
+
 import { Card } from "./Card";
 import { Link } from "react-router-dom";
 
@@ -26,8 +28,44 @@ export type Pokemon = {
   url: string;
 };
 
+const LoadMoreButton = styled.button`
+  width: 140px;
+  height: 50px;
+  font-family: "Arial";
+  border-radius: 5px;
+  background-color: #30a7d7;
+  color: white;
+  border: none;
+  font-size: 18px;
+`;
+
+
 export const Grid: React.FC = () => {
-  const [pokemonArray, setPokemonArray] = useState([]);
+  const limit = 12;
+  const [offset, setOffset] = useState<number>(0);
+  const [pokemonArray, setPokemonArray] = useState<Pokemon[]>([]);
+
+  /*const [allPokemonData, setAllPokemonData] = useState([]);
+
+  const pokemonList = getPokemonList();
+  const allPokemonNames = setAllPokemonData(pokemonList.data)
+
+  allPokemonNames.map( pokemon => { 
+    getPokemonData();
+  
+    }
+  )
+
+ const getPokemonData = (pokemonList: []) => {
+    pokemonList.forEach(async (pokemon: any) => {
+      const response = await fetch(
+        `https://pokeapi.co/api/v2/pokemon/${pokemon.name}`
+      );
+      const pokemonDataObject = await response.json();
+      console.log("***pokemonDataObject", pokemonDataObject);
+      setAllPokemon((currentList) => [...currentList, pokemonDataObject]);
+    });
+  };*/
 
   // const [loadMore, setLoadMore] = useState(
   //   "https://pokeapi.co/api/v2/pokemon?limit=12"
@@ -41,32 +79,46 @@ export const Grid: React.FC = () => {
 
   //   console.log("***pokemonListData", pokemonListData);
 
-  //   const getPokemonData = (pokemonList: []) => {
-  //     pokemonList.forEach(async (pokemon: any) => {
-  //       const response = await fetch(
-  //         `https://pokeapi.co/api/v2/pokemon/${pokemon.name}`
-  //       );
-  //       const pokemonDataObject = await response.json();
-  //       console.log("***pokemonDataObject", pokemonDataObject);
-  //       setAllPokemon((currentList) => [...currentList, pokemonDataObject]);
-  //     });
-  //   };
-  //   getPokemonData(pokemonListData.results);
+   
   // };
 
+  
   useEffect(() => {
-    getPokemonList();
-  }, []);
+    const getList = async () => {
+      const data:Pokemon[] = await getPokemonList(limit, offset);
+      setPokemonArray(currentState => [...currentState, ...data]);
+    }
+    getList();
+  }, [offset]);
+
+  useEffect(() => {
+    const getPokemon = async () => {
+      const unloaded = pokemonArray.filter((pokemon) => allPokemonData.find( pokemon.name));
+      if (unloaded.length > 0){
+      // const data:Pokemon[] = await getPokemonData(unloaded[0].url);
+      // setAllPokemonData(currentState => [...currentState, ...data]);
+      }
+    }
+    getPokemon();
+  }, [pokemonArray, allPokemonData]);
+
+  const getMorePokemon = () => {
+    setOffset(offset + limit)
+  }
 
   return (
     <div>
       <StyledGrid>
-        {pokemonArray.map((p: any) => (
-          <Link to={`/details/${p.name}`} style={{ textDecoration: "none" }}>
-            <Card pokemon={p} key={p.key} />
+        {pokemonArray.map((p: Pokemon) => (
+          <Link key={p.name} to={`/details/${p.name}`} style={{ textDecoration: "none" }}>
+            {/*<Card pokemon={p} key={p.key} />*/}
+            {p.name}
           </Link>
         ))}
       </StyledGrid>
+      <StyledButtonContainer>
+      <LoadMoreButton onClick={getMorePokemon}>Load more Pokémon</LoadMoreButton>
+      </StyledButtonContainer>
     </div>
   );
 };

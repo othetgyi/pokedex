@@ -17,30 +17,13 @@ const Title = styled.h1`
   line-height: 20px;
 `;
 
-const LoadMoreButton = styled.button`
-  width: 140px;
-  height: 50px;
-  font-family: "Arial";
-  border-radius: 5px;
-  background-color: #30a7d7;
-  color: white;
-  border: none;
-  font-size: 18px;
-`;
-
 export const Homepage = () => {
   return (
     <HomepageContainer>
       <Title>Pokédex</Title>
-      {/* <Grid /> */}
+      <Grid />
       <DescriptionComponent description="Some Pokemon description"/> 
       <TypeBadge type="fire" />
-      <LoadMoreButton>Load more Pokémon</LoadMoreButton>
-      {/* <StyledButtonContainer>
-        <StyledButton onClick={() => getPokemonList()}>
-          Load more Pokemon
-        </StyledButton>
-      </StyledButtonContainer> */}
     </HomepageContainer>
   );
 };
