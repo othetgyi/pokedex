@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-import { getPokemonList } from "../../infrastructure/HTTPPokemonDataRepository";
+import { getPokemonList, getPokemonData } from "../../infrastructure/HTTPPokemonDataRepository";
 import { Card } from "./Card";
 import { PokemonCardTypes } from "./CardTypes";
 
@@ -45,9 +45,8 @@ export const Grid: React.FC = () => {
   const limit = 12;
   const [offset, setOffset] = useState<number>(0);
   const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
-
-  /*const [allPokemonData, setAllPokemonData] = useState([]);
-
+  const [pokemonData, setPokemonData] = useState<PokemonCardTypes[]>([]);
+/*
   const allPokemonNames = setAllPokemonData(pokemonList.data)
 
   allPokemonNames.map( pokemon => { 
@@ -95,8 +94,8 @@ export const Grid: React.FC = () => {
     const getPokemon = async () => {
       const unloaded = pokemonList.filter(() => pokemonList.find(pokemon => pokemon.name));
       if (unloaded.length > 0){
-      // const data:Pokemon[] = await getPokemonData(unloaded[0].url);
-      // setAllPokemonData(currentState => [...currentState, ...data]);
+      const data: PokemonCardTypes[] = await getPokemonData(unloaded[0].url);
+      setPokemonData(currentState => [...currentState, ...data]);
       }
     }
     getPokemon();
