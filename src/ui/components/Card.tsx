@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { TypeBadge } from "./TypeBadge";
-import { PokemonCardTypes } from "./CardTypes";
+import { TypeBadge, TypeBadgeTypes } from "./TypeBadge";
 
 export const TypeContainer = styled.div`
   display: flex;
@@ -29,7 +28,24 @@ const PokemonImage = styled.img`
   max-height: 150px;
 `;
 
-export const Card: React.FC<{ pokemon: PokemonCardTypes }> = ({ pokemon }) => {
+type SpritesTypes = {
+  other: {
+    dream_world: {
+      front_default: string;
+    };
+  };
+};
+
+export type CardTypes = {
+  game_indices: {
+    id: number;
+  };
+  sprites: SpritesTypes;
+  types: TypeBadgeTypes[];
+  name: string;
+};
+
+export const Card: React.FC<{ pokemon: CardTypes }> = ({ pokemon }) => {
   console.log("***pokemon from Card***", pokemon);
   const pokemonTypes = pokemon.types;
   console.log("****pokemonTypes", pokemonTypes);

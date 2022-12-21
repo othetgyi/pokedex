@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-import { getPokemonList, getPokemonData } from "../../infrastructure/HTTPPokemonDataRepository";
-import { Card } from "./Card";
-import { PokemonCardTypes } from "./CardTypes";
-
+import {
+  getPokemonList,
+  getPokemonData,
+} from "../../infrastructure/HTTPPokemonDataRepository";
+import { Card, CardTypes } from "./Card";
 
 const StyledGrid = styled.div`
   display: grid;
@@ -40,13 +41,12 @@ const LoadMoreButton = styled.button`
   font-size: 18px;
 `;
 
-
 export const Grid: React.FC = () => {
   const limit = 12;
   const [offset, setOffset] = useState<number>(0);
   const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
-  const [pokemonData, setPokemonData] = useState<PokemonCardTypes[]>([]);
-/*
+  const [pokemonData, setPokemonData] = useState<CardTypes[]>([]);
+  /*
   const allPokemonNames = setAllPokemonData(pokemonList.data)
 
   allPokemonNames.map( pokemon => { 
@@ -78,45 +78,51 @@ export const Grid: React.FC = () => {
 
   //   console.log("***pokemonListData", pokemonListData);
 
-   
   // };
 
-  
   useEffect(() => {
     const getList = async () => {
-      const data:Pokemon[] = await getPokemonList(limit, offset);
-      setPokemonList(currentState => [...currentState, ...data]);
-    }
+      const data: Pokemon[] = await getPokemonList(limit, offset);
+      setPokemonList((currentState) => [...currentState, ...data]);
+    };
     getList();
   }, [offset]);
 
   useEffect(() => {
     const getPokemon = async () => {
-      const unloaded = pokemonList.filter(() => pokemonList.find(pokemon => pokemon.name));
-      if (unloaded.length > 0){
-      const data: PokemonCardTypes[] = await getPokemonData(unloaded[0].url);
-      setPokemonData(currentState => [...currentState, ...data]);
+      const unloaded = pokemonList.filter(() =>
+        pokemonList.find((pokemon) => pokemon.name)
+      );
+      if (unloaded.length > 0) {
+        const data: CardTypes[] = await getPokemonData(unloaded[0].url);
+        setPokemonData((currentState) => [...currentState, ...data]);
       }
-    }
+    };
     getPokemon();
   }, [pokemonList]);
 
   const getMorePokemon = () => {
-    setOffset(offset + limit)
-  }
+    setOffset(offset + limit);
+  };
 
   return (
     <div>
       <StyledGrid>
         {pokemonList.map((p: Pokemon) => (
-          <Link key={p.name} to={`/details/${p.name}`} style={{ textDecoration: "none" }}>
+          <Link
+            key={p.name}
+            to={`/details/${p.name}`}
+            style={{ textDecoration: "none" }}
+          >
             {/*<Card pokemon={p} key={p.key} />*/}
             {p.name}
           </Link>
         ))}
       </StyledGrid>
       <StyledButtonContainer>
-      <LoadMoreButton onClick={getMorePokemon}>Load more Pokémon</LoadMoreButton>
+        <LoadMoreButton onClick={getMorePokemon}>
+          Load more Pokémon
+        </LoadMoreButton>
       </StyledButtonContainer>
     </div>
   );
