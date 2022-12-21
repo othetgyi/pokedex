@@ -42,9 +42,9 @@ export const Card: React.FC<{ pokemon: PokemonCardTypes }> = ({ pokemon }) => {
       />
       <h3>{pokemon.name}</h3>
       <TypeContainer>
-        {/* {pokemon.types?.map((typeIndex) => (
+        {pokemon.types?.map((typeIndex) => (
           <TypeBadge type={typeIndex.type.name}></TypeBadge>
-        ))} */}
+        ))}
       </TypeContainer>
     </CardContainer>
   );

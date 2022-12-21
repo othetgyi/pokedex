@@ -10,9 +10,4 @@ export interface PokemonCardTypes {
     };
   };
   name: string;
-  types: {
-    type: {
-      name: string;
-    };
-  };
 }

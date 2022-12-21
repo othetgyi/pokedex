@@ -81,6 +81,13 @@ const matchTypeToColour = (type: string) => {
       `;
   }
 };
+export interface TypeBadgeTypes {
+  types: [
+    type: {
+      name: string;
+    }
+  ];
+}
 
 const TypeBadgeContainer = styled.div<{ type: string }>`
   display: flex;
