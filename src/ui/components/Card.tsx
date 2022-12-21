@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { TypeBadge } from "./TypeBadge";
 import { PokemonCardTypes } from "./CardTypes";
 
-export const StyledTypeBadgeContainer = styled.div`
+export const TypeContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -41,11 +41,11 @@ export const Card: React.FC<{ pokemon: PokemonCardTypes }> = ({ pokemon }) => {
         alt={pokemon.name}
       />
       <h3>{pokemon.name}</h3>
-      <StyledTypeBadgeContainer>
+      <TypeContainer>
         {/* {pokemon.types?.map((typeIndex) => (
           <TypeBadge type={typeIndex.type.name}></TypeBadge>
         ))} */}
-      </StyledTypeBadgeContainer>
+      </TypeContainer>
     </CardContainer>
   );
 };
