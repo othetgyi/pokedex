@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { TypeBadge, TypeBadgeTypes } from "./TypeBadge";
+import { TypeBadge } from "./TypeBadge";
 
 export const TypeContainer = styled.div`
   display: flex;
@@ -28,6 +28,12 @@ const PokemonImage = styled.img`
   max-height: 150px;
 `;
 
+interface TypeBadgeTypes {
+  type: {
+    name: string;
+  };
+}
+
 export const Card: React.FC<{
   imageSource: string;
   name: string;
@@ -39,8 +45,8 @@ export const Card: React.FC<{
       <PokemonImage src={imageSource} alt={name} />
       <h3>{name}</h3>
       <TypeContainer>
-        {types.map((t) => (
-          <TypeBadge type={typeName} />
+        {types.map((t: TypeBadgeTypes) => (
+          <TypeBadge type={t.type.name} />
         ))}
       </TypeContainer>
     </CardContainer>

@@ -6,7 +6,7 @@ import {
   getPokemonList,
   getPokemonData,
 } from "../../infrastructure/HTTPPokemonDataRepository";
-import { Card, CardTypes } from "./Card";
+import { Card } from "./Card";
 
 const StyledGrid = styled.div`
   display: grid;
@@ -81,8 +81,7 @@ export const Grid: React.FC = () => {
             to={`/details/${p.name}`}
             style={{ textDecoration: "none" }}
           >
-            <Card pokemon={p} key={p.name} />
-            {p.name}
+            <Card imageSource={} name={} types={} />
           </Link>
         ))}
       </StyledGrid>

@@ -81,11 +81,6 @@ const matchTypeToColour = (type: string) => {
       `;
   }
 };
-export type TypeBadgeTypes = {
-  type: {
-    name: string;
-  };
-};
 
 const TypeBadgeContainer = styled.div<{ type: string }>`
   display: flex;
