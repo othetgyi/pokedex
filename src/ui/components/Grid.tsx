@@ -25,11 +25,6 @@ const StyledButtonContainer = styled.div`
   padding: 20px;
 `;
 
-export type Pokemon = {
-  name: string;
-  url: string;
-};
-
 const LoadMoreButton = styled.button`
   width: 140px;
   height: 50px;
@@ -41,15 +36,22 @@ const LoadMoreButton = styled.button`
   font-size: 18px;
 `;
 
+interface PokemonListTypes {
+  name: string;
+  url: string;
+}
+
+interface;
+
 export const Grid: React.FC = () => {
   const limit = 12;
   const [offset, setOffset] = useState<number>(0);
-  const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
+  const [pokemonList, setPokemonList] = useState<PokemonListTypes[]>([]);
   const [pokemonData, setPokemonData] = useState<CardTypes[]>([]);
 
   useEffect(() => {
     const getList = async () => {
-      const data: Pokemon[] = await getPokemonList(limit, offset);
+      const data: PokemonListTypes[] = await getPokemonList(limit, offset);
       setPokemonList((currentState) => [...currentState, ...data]);
     };
     getList();
@@ -103,13 +105,4 @@ export const Grid: React.FC = () => {
 //       front_default: string;
 //     };
 //   };
-// };
-
-// export type CardTypes = {
-//   game_indices?: {
-//     id: number;
-//   };
-//   sprites: SpritesTypes;
-//   types: TypeBadgeTypes[];
-//   name: string;
 // };

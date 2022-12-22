@@ -38,8 +38,7 @@ export const Card: React.FC<{
   imageSource: string;
   name: string;
   types: TypeBadgeTypes[];
-  typeName: string;
-}> = ({ imageSource, name, types, typeName }) => {
+}> = ({ imageSource, name, types }) => {
   return (
     <CardContainer>
       <PokemonImage src={imageSource} alt={name} />
