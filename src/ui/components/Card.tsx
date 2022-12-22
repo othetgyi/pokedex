@@ -28,38 +28,19 @@ const PokemonImage = styled.img`
   max-height: 150px;
 `;
 
-type SpritesTypes = {
-  other: {
-    dream_world: {
-      front_default: string;
-    };
-  };
-};
-
-export type CardTypes = {
-  game_indices: {
-    id: number;
-  };
-  sprites: SpritesTypes;
-  types: TypeBadgeTypes[];
+export const Card: React.FC<{
+  imageSource: string;
   name: string;
-};
-
-export const Card: React.FC<{ pokemon: CardTypes }> = ({ pokemon }) => {
-  console.log("***pokemon from Card***", pokemon);
-  const pokemonTypes = pokemon.types;
-  console.log("****pokemonTypes", pokemonTypes);
-
+  types: TypeBadgeTypes[];
+  typeName: string;
+}> = ({ imageSource, name, types, typeName }) => {
   return (
     <CardContainer>
-      <PokemonImage
-        src={pokemon.sprites.other.dream_world.front_default}
-        alt={pokemon.name}
-      />
-      <h3>{pokemon.name}</h3>
+      <PokemonImage src={imageSource} alt={name} />
+      <h3>{name}</h3>
       <TypeContainer>
-        {pokemon.types?.map((typeIndex) => (
-          <TypeBadge type={typeIndex.type.name}></TypeBadge>
+        {types.map((t) => (
+          <TypeBadge type={typeName} />
         ))}
       </TypeContainer>
     </CardContainer>

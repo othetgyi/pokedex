@@ -46,39 +46,6 @@ export const Grid: React.FC = () => {
   const [offset, setOffset] = useState<number>(0);
   const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
   const [pokemonData, setPokemonData] = useState<CardTypes[]>([]);
-  /*
-  const allPokemonNames = setAllPokemonData(pokemonList.data)
-
-  allPokemonNames.map( pokemon => { 
-    getPokemonData();
-  
-    }
-  )
-
- const getPokemonData = (pokemonList: []) => {
-    pokemonList.forEach(async (pokemon: any) => {
-      const response = await fetch(
-        `https://pokeapi.co/api/v2/pokemon/${pokemon.name}`
-      );
-      const pokemonDataObject = await response.json();
-      console.log("***pokemonDataObject", pokemonDataObject);
-      setAllPokemon((currentList) => [...currentList, pokemonDataObject]);
-    });
-  };*/
-
-  // const [loadMore, setLoadMore] = useState(
-  //   "https://pokeapi.co/api/v2/pokemon?limit=12"
-  // );
-
-  // const getPokemonList = async () => {
-  //   const response = await fetch(loadMore);
-  //   const pokemonListData = await response.json();
-
-  //   setLoadMore(pokemonListData.next);
-
-  //   console.log("***pokemonListData", pokemonListData);
-
-  // };
 
   useEffect(() => {
     const getList = async () => {
@@ -108,13 +75,13 @@ export const Grid: React.FC = () => {
   return (
     <div>
       <StyledGrid>
-        {pokemonList.map((p: Pokemon) => (
+        {pokemonList.map((p) => (
           <Link
             key={p.name}
             to={`/details/${p.name}`}
             style={{ textDecoration: "none" }}
           >
-            {/*<Card pokemon={p} key={p.key} />*/}
+            <Card pokemon={p} key={p.name} />
             {p.name}
           </Link>
         ))}
@@ -127,3 +94,23 @@ export const Grid: React.FC = () => {
     </div>
   );
 };
+
+// src={pokemon.sprites.other.dream_world.front_default}
+//         alt={pokemon.name}
+
+// type SpritesTypes = {
+//   other: {
+//     dream_world: {
+//       front_default: string;
+//     };
+//   };
+// };
+
+// export type CardTypes = {
+//   game_indices?: {
+//     id: number;
+//   };
+//   sprites: SpritesTypes;
+//   types: TypeBadgeTypes[];
+//   name: string;
+// };
