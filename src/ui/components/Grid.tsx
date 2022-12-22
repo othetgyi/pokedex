@@ -6,7 +6,7 @@ import {
   getPokemonList,
   getPokemonData,
 } from "../../infrastructure/HTTPPokemonDataRepository";
-import { Card } from "./Card";
+import { Card, TypeBadgeTypes } from "./Card";
 
 const StyledGrid = styled.div`
   display: grid;
@@ -36,18 +36,28 @@ const LoadMoreButton = styled.button`
   font-size: 18px;
 `;
 
-interface PokemonListTypes {
+interface PokemonListTypes extends PokemonDataTypes {
   name: string;
   url: string;
 }
 
-interface;
+interface PokemonDataTypes {
+  sprites: {
+    other: {
+      dream_world: {
+        front_default: string;
+      };
+    };
+  };
+  name: string;
+  types: TypeBadgeTypes[];
+}
 
 export const Grid: React.FC = () => {
   const limit = 12;
   const [offset, setOffset] = useState<number>(0);
   const [pokemonList, setPokemonList] = useState<PokemonListTypes[]>([]);
-  const [pokemonData, setPokemonData] = useState<CardTypes[]>([]);
+  const [pokemonData, setPokemonData] = useState<PokemonDataTypes[]>([]);
 
   useEffect(() => {
     const getList = async () => {
@@ -63,7 +73,7 @@ export const Grid: React.FC = () => {
         pokemonList.find((pokemon) => pokemon.name)
       );
       if (unloaded.length > 0) {
-        const data: CardTypes[] = await getPokemonData(unloaded[0].url);
+        const data: PokemonDataTypes[] = await getPokemonData(unloaded[0].url);
         setPokemonData((currentState) => [...currentState, ...data]);
       }
     };
@@ -83,7 +93,11 @@ export const Grid: React.FC = () => {
             to={`/details/${p.name}`}
             style={{ textDecoration: "none" }}
           >
-            <Card imageSource={} name={} types={} />
+            <Card
+              imageSource={p.sprites.other.dream_world.front_default}
+              name={p.name}
+              types={p.types}
+            />
           </Link>
         ))}
       </StyledGrid>
@@ -95,14 +109,3 @@ export const Grid: React.FC = () => {
     </div>
   );
 };
-
-// src={pokemon.sprites.other.dream_world.front_default}
-//         alt={pokemon.name}
-
-// type SpritesTypes = {
-//   other: {
-//     dream_world: {
-//       front_default: string;
-//     };
-//   };
-// };

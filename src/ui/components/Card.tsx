@@ -28,7 +28,7 @@ const PokemonImage = styled.img`
   max-height: 150px;
 `;
 
-interface TypeBadgeTypes {
+export interface TypeBadgeTypes {
   type: {
     name: string;
   };

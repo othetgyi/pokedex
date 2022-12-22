@@ -1,7 +1,5 @@
 import styled from "styled-components";
 import { Grid } from "./Grid";
-import { TypeBadge } from "./TypeBadge";
-import { DescriptionComponent } from "./DescriptionComponent";
 
 const HomepageContainer = styled.div`
   display: flex;
