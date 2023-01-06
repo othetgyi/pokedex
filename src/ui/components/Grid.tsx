@@ -68,22 +68,25 @@ export const Grid: React.FC = () => {
   }, [offset]);
 
   useEffect(() => {
+    console.log("***getPokemonUseEffect");
     const getPokemon = async () => {
       const unloaded = pokemonList.filter(() =>
         pokemonList.find((pokemon) => pokemon.name)
       );
+      console.log("***unloaded", unloaded);
       if (unloaded.length > 0) {
-        const data: PokemonDataTypes[] = await getPokemonData(unloaded[0].url);
+        const data: PokemonDataTypes[] = await getPokemonData(unloaded[0].name);
         setPokemonData((currentState) => [...currentState, ...data]);
       }
     };
     getPokemon();
   }, [pokemonList]);
 
+  console.log("***pokemonList", pokemonList);
+
   const getMorePokemon = () => {
     setOffset(offset + limit);
   };
-
   return (
     <div>
       <StyledGrid>

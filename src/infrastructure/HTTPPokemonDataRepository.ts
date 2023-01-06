@@ -17,8 +17,10 @@ export const getPokemonList = async (limit: number, offset: number) => {
 export const getPokemonData = async (pokemon: string) => {
   try {
     const response = await axios.get(`${API_URL}/${pokemon}`);
+    console.log("***getPokemonData***", response);
+    console.log("***getPokemonData.data***", response.data);
     console.log("***getPokemonData.data.results***", response.data.results);
-    return response.data.results;
+    return response.data;
   } catch (error) {
     console.log("***In getPokemonData catch block***");
     return null;
