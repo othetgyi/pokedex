@@ -17,7 +17,7 @@ describe("HTTPPokemonDataRepository", () => {
             },
           ],
         });
-      expect(await getPokemonList(0,0)).toEqual([
+      expect(await getPokemonList(0)).toEqual([
         {
           name: "mock Pokemon",
           url: "https://fakePokemonUrl.com",
@@ -36,24 +36,27 @@ describe("HTTPPokemonDataRepository", () => {
               sprites: {
                 other: {
                   dream_world: {
-                    front_default: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/mock_pokemon.svg"
-                  }
-                }
-              }
-            }
-          ]
+                    front_default:
+                      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/mock_pokemon.svg",
+                  },
+                },
+              },
+            },
+          ],
         });
-        expect(await getPokemonData('mockPokemon')).toEqual([
-          {
-            name: "mockPokemon",
-            sprites: {
-              other: {
-                dream_world: {
-                  front_default: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/mock_pokemon.svg"
-              }
-            }
-          }
-        }])
-    })
-  })
+      expect(await getPokemonData("mockPokemon")).toEqual([
+        {
+          name: "mockPokemon",
+          sprites: {
+            other: {
+              dream_world: {
+                front_default:
+                  "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/mock_pokemon.svg",
+              },
+            },
+          },
+        },
+      ]);
+    });
+  });
 });
