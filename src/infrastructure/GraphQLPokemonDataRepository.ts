@@ -55,10 +55,6 @@ export const getPokemons = async () => {
       data: pokemonsQuery,
       headers: headers,
     });
-    console.log(
-      "***response.data.data.pokemons.results",
-      response.data.data.pokemons.results
-    );
     return response.data.data.pokemons.results;
   } catch {
     console.log("***In the list catch block");
@@ -77,9 +73,7 @@ export const getPokemonData = async (name: string) => {
       },
       headers: headers,
     });
-
-    console.log("***Pokemon Data response", response);
-    // return response;
+    return response.data.data.pokemon;
   } catch {
     console.log("***In the data catch block");
   }

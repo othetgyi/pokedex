@@ -25,7 +25,7 @@ const CardContainer = styled.div`
 
 const PokemonImage = styled.img`
   width: auto;
-  max-height: 150px;
+  max-height: 50px;
 `;
 
 export interface TypeBadgeTypes {
@@ -44,7 +44,7 @@ export const Card: React.FC<{
       <PokemonImage src={imageSource} alt={name} />
       <h3>{name}</h3>
       <TypeContainer>
-        {types.map((t: TypeBadgeTypes) => (
+        {types?.map((t: TypeBadgeTypes) => (
           <TypeBadge type={t.type.name} />
         ))}
       </TypeContainer>
