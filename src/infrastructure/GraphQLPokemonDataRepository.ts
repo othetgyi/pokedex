@@ -26,6 +26,27 @@ const pokemonsQuery = {
   variables: {},
 };
 
+const GET_POKEMON_DATA = `{
+  pokemon(name: $name) {
+  id
+  name
+  sprites {
+    front_default
+  }
+  moves {
+    move {
+      name
+    }
+  }
+  types {
+    type {
+      name
+    }
+  }
+}
+}
+`;
+
 export const getPokemons = async () => {
   try {
     const response = await axios({
@@ -40,6 +61,26 @@ export const getPokemons = async () => {
     );
     return response.data.data.pokemons.results;
   } catch {
-    console.log("***In the catch block");
+    console.log("***In the list catch block");
+  }
+};
+
+export const getPokemonData = async (name: string) => {
+  try {
+    const response = await axios({
+      url: endpoint,
+      method: "post",
+      data: {
+        operationName: "getPokemonData",
+        query: `query getPokemonData($name: String!) ${GET_POKEMON_DATA}`,
+        variables: { name: name },
+      },
+      headers: headers,
+    });
+
+    console.log("***Pokemon Data response", response);
+    // return response;
+  } catch {
+    console.log("***In the data catch block");
   }
 };
