@@ -25,7 +25,7 @@ const CardContainer = styled.div`
 
 const PokemonImage = styled.img`
   width: auto;
-  max-height: 50px;
+  max-height: 100px;
 `;
 
 export interface TypeBadgeTypes {

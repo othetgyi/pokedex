@@ -36,18 +36,14 @@ const LoadMoreButton = styled.button`
   font-size: 18px;
 `;
 
-interface PokemonListTypes extends PokemonDataTypes {
+interface PokemonListTypes {
   name: string;
   url: string;
 }
 
 interface PokemonDataTypes {
   sprites: {
-    other: {
-      dream_world: {
-        front_default: string;
-      };
-    };
+    front_default: string;
   };
   name: string;
   types: TypeBadgeTypes[];
@@ -70,31 +66,32 @@ export const Grid: React.FC = () => {
 
   useEffect(() => {
     const getPokemonDetails: any = () => {
-      pokemonList.forEach(async (pokemon: any) => {
+      pokemonList.map(async (p) => {
         try {
-          const resultData = await getPokemonData(pokemon.name);
-          setPokemonData(resultData);
+          const resultData = await getPokemonData(p.name);
+          setPokemonData((pokemonData) => [...pokemonData, resultData]);
         } catch (err) {
           console.log("***GetPokemonData catch block");
         }
       });
     };
+
     getPokemonDetails();
-  }, []);
+  }, [pokemonList]);
 
   return (
     <div>
       <StyledGrid>
-        {pokemonList.map((p: any) => (
+        {pokemonData.map((pokemon: any) => (
           <Link
-            key={p.name}
-            to={`/details/${p.name}`}
+            key={pokemon.name}
+            to={`/details/${pokemon.name}`}
             style={{ textDecoration: "none" }}
           >
             <Card
-              imageSource={p.sprites?.front_default}
-              name={p.name}
-              types={p.types}
+              imageSource={pokemon?.sprites?.front_default}
+              name={pokemon.name}
+              types={pokemon.types}
             />
           </Link>
         ))}
